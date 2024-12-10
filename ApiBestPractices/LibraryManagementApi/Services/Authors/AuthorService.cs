@@ -3,6 +3,7 @@ using LibraryManagementApi.Repositories;
 using LibraryManagementApi.Repositories.Authors;
 using LibraryManagementApi.Services.Authors.Create;
 using LibraryManagementApi.Services.Authors.Update;
+using LibraryManagementApi.Services.Books;
 using Microsoft.EntityFrameworkCore;
 using System.Net;
 
@@ -27,10 +28,11 @@ namespace LibraryManagementApi.Services.Authors
         public async Task<ServiceResult<List<AuthorDto>>> GetAllListAsync()
         {
             var cacheKey = "authors-all-list";
-            var cachedData = await cacheService.GetFromCacheAsync<List<AuthorDto>>(cacheKey);
-            if (cachedData != null)
+            var cacheResult = await cacheService.GetFromCacheAsync<List<AuthorDto>>(cacheKey);
+
+            if (cacheResult.IsSuccess && cacheResult.Data != null)
             {
-                return ServiceResult<List<AuthorDto>>.Success(cachedData);
+                return ServiceResult<List<AuthorDto>>.Success(cacheResult.Data);
             }
 
             var authors = await authorRepository.GetAll().ToListAsync();
@@ -72,10 +74,11 @@ namespace LibraryManagementApi.Services.Authors
         public async Task<ServiceResult<AuthorWithBooksDto>> GetBooksWithAuthorIdAsync(int id)
         {
             var cacheKey = $"author-books-{id}";
-            var cachedData = await cacheService.GetFromCacheAsync<AuthorWithBooksDto>(cacheKey);
-            if (cachedData != null)
+            var cacheResult = await cacheService.GetFromCacheAsync<AuthorWithBooksDto>(cacheKey);
+
+            if (cacheResult.IsSuccess && cacheResult.Data != null)
             {
-                return ServiceResult<AuthorWithBooksDto>.Success(cachedData);
+                return ServiceResult<AuthorWithBooksDto>.Success(cacheResult.Data);
             }
 
             var author = await authorRepository.GetAuthorWithBooksAsync(id);
@@ -95,10 +98,11 @@ namespace LibraryManagementApi.Services.Authors
         public async Task<ServiceResult<List<AuthorWithBooksDto>>> GetBooksWithAuthorsAsync()
         {
             var cacheKey = "authors-books";
-            var cachedData = await cacheService.GetFromCacheAsync<List<AuthorWithBooksDto>>(cacheKey);
-            if (cachedData != null)
+            var cacheResult = await cacheService.GetFromCacheAsync<List<AuthorWithBooksDto>>(cacheKey);
+
+            if (cacheResult.IsSuccess && cacheResult.Data != null)
             {
-                return ServiceResult<List<AuthorWithBooksDto>>.Success(cachedData);
+                return ServiceResult<List<AuthorWithBooksDto>>.Success(cacheResult.Data);
             }
 
             var authors = await authorRepository.GetAuthorWithBooks().ToListAsync();
@@ -117,60 +121,41 @@ namespace LibraryManagementApi.Services.Authors
 
         public async Task<ServiceResult<int>> CreateAsync(CreateAuthorRequest request)
         {
-            try
-            {
-                var author = mapper.Map<Author>(request);
-                await authorRepository.AddAsync(author);
-                await unitOfWork.Save();
-                return ServiceResult<int>.Success(author.Id);
-            }
-            catch (DbUpdateException ex)
-            {
-                throw new InvalidOperationException("Database error occurred while saving author.", ex);
-            }
+
+            var author = mapper.Map<Author>(request);
+            await authorRepository.AddAsync(author);
+            await unitOfWork.Save();
+
+            return ServiceResult<int>.Success(author.Id);
         }
 
         public async Task<ServiceResult> UpdateAsync(int id, UpdateAuthorRequest request)
         {
-            try
+            var author = await authorRepository.Get(id);
+            if (author == null)
             {
-                var author = await authorRepository.Get(id);
-                if (author == null)
-                {
-                    return ServiceResult.Fail($"Author with ID {id} was not found.");
-                }
-
-                mapper.Map(request, author);
-                authorRepository.Update(author);
-                await unitOfWork.Save();
-
-                return ServiceResult.Success();
+                return ServiceResult.Fail($"Author with ID {id} was not found.");
             }
-            catch (DbUpdateException ex)
-            {
-                return ServiceResult.Fail("Database error occurred during update.");
-            }
+
+            mapper.Map(request, author);
+            authorRepository.Update(author);
+            await unitOfWork.Save();
+
+            return ServiceResult.Success();
         }
 
         public async Task<ServiceResult> DeleteAsync(int id)
         {
-            try
+            var author = await authorRepository.Get(id);
+            if (author == null)
             {
-                var author = await authorRepository.Get(id);
-                if (author == null)
-                {
-                    return ServiceResult.Fail($"Author with ID {id} was not found.");
-                }
-
-                authorRepository.Delete(author.Id);
-                await unitOfWork.Save();
-
-                return ServiceResult.Success();
+                return ServiceResult.Fail($"Author with ID {id} was not found.");
             }
-            catch (DbUpdateException ex)
-            {
-                return ServiceResult.Fail("Database error occurred during deletion.");
-            }
+
+            authorRepository.Delete(author.Id);
+            await unitOfWork.Save();
+
+            return ServiceResult.Success();
         }
     }
 }

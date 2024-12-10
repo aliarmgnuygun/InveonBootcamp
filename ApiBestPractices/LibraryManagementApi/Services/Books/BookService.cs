@@ -14,10 +14,11 @@ namespace LibraryManagementApi.Services.Books
         public async Task<ServiceResult<List<BookDto>>> GetAllAsync()
         {
             var cacheKey = "books-all-list";
-            var cachedData = await cacheService.GetFromCacheAsync<List<BookDto>>(cacheKey);
-            if (cachedData != null)
+            var cacheResult = await cacheService.GetFromCacheAsync<List<BookDto>>(cacheKey);
+
+            if (cacheResult.IsSuccess && cacheResult.Data != null)
             {
-                return ServiceResult<List<BookDto>>.Success(cachedData);
+                return ServiceResult<List<BookDto>>.Success(cacheResult.Data);
             }
 
             var books = await bookRepository.GetAll().ToListAsync();
@@ -34,10 +35,11 @@ namespace LibraryManagementApi.Services.Books
         public async Task<ServiceResult<BookDto>> GetByIdAsync(int id)
         {
             var cacheKey = $"book-{id}";
-            var cachedData = await cacheService.GetFromCacheAsync<BookDto>(cacheKey);
-            if (cachedData != null)
+            var cacheResult = await cacheService.GetFromCacheAsync<BookDto>(cacheKey);
+
+            if (cacheResult.IsSuccess && cacheResult.Data != null)
             {
-                return ServiceResult<BookDto>.Success(cachedData);
+                return ServiceResult<BookDto>.Success(cacheResult.Data);
             }
             var book = await bookRepository.Get(id);
             if (book == null)
@@ -77,21 +79,14 @@ namespace LibraryManagementApi.Services.Books
 
         public async Task<ServiceResult> DeleteAsync(int id)
         {
-            try
+            var book = await bookRepository.Get(id);
+            if (book == null)
             {
-                var book = await bookRepository.Get(id);
-                if (book == null)
-                {
-                    return ServiceResult.Fail("Book not found.", HttpStatusCode.NotFound);
-                }
-                bookRepository.Delete(book.Id);
-                await unitOfWork.Save();
-                return ServiceResult.Success(HttpStatusCode.NoContent);
+                return ServiceResult.Fail("Book not found.", HttpStatusCode.NotFound);
             }
-            catch (Exception ex)
-            {
-                throw new InvalidOperationException("Database error occurred while deleting book.", ex);
-            }
+            bookRepository.Delete(book.Id);
+            await unitOfWork.Save();
+            return ServiceResult.Success(HttpStatusCode.NoContent);
         }
     }
 }
