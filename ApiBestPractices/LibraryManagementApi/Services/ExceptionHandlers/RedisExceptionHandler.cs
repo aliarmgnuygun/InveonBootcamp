@@ -1,27 +1,31 @@
 ﻿using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using System.Net;
+using System.Text.Json;
 
 namespace LibraryManagementApi.Services.ExceptionHandlers
 {
-    public class GlobalExceptionHandler(IProblemDetailsService problemDetailsService) : IExceptionHandler
+    public class RedisExceptionHandler : IExceptionHandler
     {
         public async ValueTask<bool> TryHandleAsync(HttpContext httpContext, Exception exception, CancellationToken cancellationToken)
         {
-
-            return await problemDetailsService.TryWriteAsync(new ProblemDetailsContext
+            if (exception is RedisConnectionException)
             {
-                HttpContext = httpContext,
-                Exception = exception,
-                ProblemDetails = new ProblemDetails
+                var response = new ProblemDetails
                 {
                     Status = (int)HttpStatusCode.InternalServerError,
-                    Title = "An error occurred while processing your request.",
+                    Title = "An error occurred while accessing Redis Cache.",
                     Detail = exception.Message,
                     Type = exception.GetType().Name,
                     Instance = httpContext.Request.Path
-                }
-            });
+                };
+
+                var result = JsonSerializer.Serialize(response);
+                await httpContext.Response.WriteAsync(result, cancellationToken);
+
+                return true;
+            }
+            return false;
         }
     }
 }
