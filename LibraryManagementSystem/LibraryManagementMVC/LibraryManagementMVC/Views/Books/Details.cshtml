@@ -1,0 +1,50 @@
+﻿@model LibraryManagementSystem.Business.Books.Dto.BookDetailsDto
+
+@{
+    ViewData["Title"] = "Book Details";
+}
+
+<div class="card shadow border-0 my-4">
+    <div class="card-header bg-secondary bg-gradient ml-0 py-3">
+        <h2 class="text-white text-center">Book Details</h2>
+    </div>
+    <div class="card-body p-4">
+        <dl class="row">
+            <dt class="col-sm-3">Id:</dt>
+            <dd class="col-sm-9">@Model.Id</dd>
+
+            <dt class="col-sm-3">Title:</dt>
+            <dd class="col-sm-9">@Model.Title</dd>
+
+            <dt class="col-sm-3">Author:</dt>
+            <dd class="col-sm-9">@Model.Author</dd>
+
+            <dt class="col-sm-3">Publication Year:</dt>
+            <dd class="col-sm-9">@Model.PublicationYear</dd>
+
+            <dt class="col-sm-3">ISBN:</dt>
+            <dd class="col-sm-9">@Model.ISBN</dd>
+
+            <dt class="col-sm-3">Genre:</dt>
+            <dd class="col-sm-9">@Model.Genre</dd>
+
+            <dt class="col-sm-3">Publisher:</dt>
+            <dd class="col-sm-9">@Model.Publisher</dd>
+
+            <dt class="col-sm-3">Page Count:</dt>
+            <dd class="col-sm-9">@Model.PageCount</dd>
+
+            <dt class="col-sm-3">Language:</dt>
+            <dd class="col-sm-9">@Model.Language</dd>
+
+            <dt class="col-sm-3">Summary:</dt>
+            <dd class="col-sm-9">@Model.Summary</dd>
+
+            <dt class="col-sm-3">Available Copies:</dt>
+            <dd class="col-sm-9">@Model.AvailableCopies</dd>
+        </dl>
+        <div class="text-center">
+            <a asp-controller="Books" asp-action="Index" class="btn btn-secondary">Back to List</a>
+        </div>
+    </div>
+</div>
