@@ -1,6 +1,5 @@
-using LibraryManagementSystem.DataAccess.Extensions;
-using LibraryManagementSystem.Business.Extensions;
-using System.Reflection;
+using LibraryManagementSystem.Data.DbInitializer;
+using LibraryManagementSystem.Services.Extensions;
 
 namespace LibraryManagementMVC
 {
@@ -10,15 +9,16 @@ namespace LibraryManagementMVC
         {
             var builder = WebApplication.CreateBuilder(args);
 
+            builder.Services.AddServicesAndConfigs(builder.Configuration).AddRepositories();
+            builder.Services.AddRazorPages();
             // Add services to the container.
             builder.Services.AddControllersWithViews();
-
-            builder.Services.AddServicesAndConfigs(builder.Configuration).AddRepositories();
-            builder.Services.AddServices();
-
-            builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());
+            builder.Services.AddServices().AddRepositories();
+            builder.Services.AddScoped<IDbInitializer, DbInitializer>();
+            builder.Services.AddIdentityServices();
 
             var app = builder.Build();
+            app.AddSeedData();
 
             // Configure the HTTP request pipeline.
             if (!app.Environment.IsDevelopment())
@@ -31,12 +31,13 @@ namespace LibraryManagementMVC
             app.UseHttpsRedirection();
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
-
+            app.MapRazorPages();
             app.MapStaticAssets();
             app.MapControllerRoute(
                 name: "default",
-                pattern: "{controller=Home}/{action=Index}/{id?}")
+                pattern: "{area=Member}/{controller=Home}/{action=Index}/{id?}")
                 .WithStaticAssets();
 
             app.Run();

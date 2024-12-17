@@ -5,12 +5,12 @@ $(document).ready(function () {
 
 function loadDataTable() {
     dataTable = $('#tblData').DataTable({
-        "ajax": { url: '/Books/GetAll', type: 'GET' },
+        "ajax": { url: '/admin/book/getall', type: 'GET' },
         "columns": [
             {
                 data: 'title',
                 "render": function (data, type, row) {
-                    return `<a href="/Books/Details/${row.id}">${data}</a>`;
+                    return `<a href="/admin/book/details/${row.id}">${data}</a>`;
                 },
                 width: '25%'
             },
@@ -21,8 +21,8 @@ function loadDataTable() {
                 data: 'id',
                 "render": function (data) {
                     return `<div class="w-75 btn-group" role="group">
-                    <a href="/books/upsert?id=${data}" class="btn btn-primary mx-2"><i class="bi bi-pencil-square"></i> Edit </a>
-                    <a onClick=Delete('/admin/product/delete/${data}') class="btn btn-danger mx-2"><i class="bi bi-trash-fill"></i> Delete </a>
+                    <a href="/admin/book/upsert?id=${data}" class="btn btn-primary mx-2"><i class="bi bi-pencil-square"></i> Edit </a>
+                    <a onClick=Delete('/admin/book/delete/${data}') class="btn btn-danger mx-2"><i class="bi bi-trash-fill"></i> Delete </a>
                     </div>`
                 },
                 width: '25%'
