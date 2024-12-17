@@ -190,46 +190,47 @@ Custom exceptions like `NotFoundException` are also included for cleaner error r
 ## Screenshots
 
 ### Dropdown Example
-[![Dropdown]([wwwroot/screenshoots/Dropdown.png]((https://github.com/aliarmgnuygun/InveonBootcamp/blob/week/2/LibraryManagementSystem/LibraryManagementMVC/wwwroot/screenshoots/Dropdown.png)))
+![Dropdown](https://raw.githubusercontent.com/aliarmgnuygun/InveonBootcamp/week/2/LibraryManagementSystem/LibraryManagementMVC/wwwroot/screenshoots/Dropdown.png)
 
 ### Book Detail Page
-![Book Detail]([wwwroot/screenshoots/book_detail.png](https://github.com/aliarmgnuygun/InveonBootcamp/blob/week/2/LibraryManagementSystem/LibraryManagementMVC/wwwroot/screenshoots/book_detail.png))
+![Book Detail](https://raw.githubusercontent.com/aliarmgnuygun/InveonBootcamp/week/2/LibraryManagementSystem/LibraryManagementMVC/wwwroot/screenshoots/book_detail.png)
 
 ### Book List Page
-![Book List]([wwwroot/screenshoots/book_list.png](https://github.com/aliarmgnuygun/InveonBootcamp/blob/week/2/LibraryManagementSystem/LibraryManagementMVC/wwwroot/screenshoots/book_list.png))
+![Book List](https://raw.githubusercontent.com/aliarmgnuygun/InveonBootcamp/week/2/LibraryManagementSystem/LibraryManagementMVC/wwwroot/screenshoots/book_list.png)
 
 ### Create Book Page
-![Create Book]([wwwroot/screenshoots/create_book.png](https://github.com/aliarmgnuygun/InveonBootcamp/blob/week/2/LibraryManagementSystem/LibraryManagementMVC/wwwroot/screenshoots/create_book.png))
+![Create Book](https://raw.githubusercontent.com/aliarmgnuygun/InveonBootcamp/week/2/LibraryManagementSystem/LibraryManagementMVC/wwwroot/screenshoots/create_book.png)
 
 ### Create User for Admin Page
-![Create User for Admin]([wwwroot/screenshoots/create_user_for_admin.png](https://github.com/aliarmgnuygun/InveonBootcamp/blob/week/2/LibraryManagementSystem/LibraryManagementMVC/wwwroot/screenshoots/create_user_for_admin.png))
+![Create User for Admin](https://raw.githubusercontent.com/aliarmgnuygun/InveonBootcamp/week/2/LibraryManagementSystem/LibraryManagementMVC/wwwroot/screenshoots/create_user_for_admin.png)
 
 ### Database Screenshot
-![Database]([wwwroot/screenshoots/database.png](https://github.com/aliarmgnuygun/InveonBootcamp/blob/week/2/LibraryManagementSystem/LibraryManagementMVC/wwwroot/screenshoots/database.png))
+![Database](https://raw.githubusercontent.com/aliarmgnuygun/InveonBootcamp/week/2/LibraryManagementSystem/LibraryManagementMVC/wwwroot/screenshoots/database.png)
 
 ### Home Page
-![Home Page]([wwwroot/screenshoots/home_page.png](https://github.com/aliarmgnuygun/InveonBootcamp/blob/week/2/LibraryManagementSystem/LibraryManagementMVC/wwwroot/screenshoots/home_page.png))
+![Home Page](https://raw.githubusercontent.com/aliarmgnuygun/InveonBootcamp/week/2/LibraryManagementSystem/LibraryManagementMVC/wwwroot/screenshoots/home_page.png)
 
 ### Login Page
-![Login Page]([wwwroot/screenshoots/log_in.png](https://github.com/aliarmgnuygun/InveonBootcamp/blob/week/2/LibraryManagementSystem/LibraryManagementMVC/wwwroot/screenshoots/log_in.png))
+![Login Page](https://raw.githubusercontent.com/aliarmgnuygun/InveonBootcamp/week/2/LibraryManagementSystem/LibraryManagementMVC/wwwroot/screenshoots/log_in.png)
 
 ### Manage User Role Page
-![Manage User Role]([wwwroot/screenshoots/manage_user_role.png](https://github.com/aliarmgnuygun/InveonBootcamp/blob/week/2/LibraryManagementSystem/LibraryManagementMVC/wwwroot/screenshoots/manage_user_role.png))
+![Manage User Role](https://raw.githubusercontent.com/aliarmgnuygun/InveonBootcamp/week/2/LibraryManagementSystem/LibraryManagementMVC/wwwroot/screenshoots/manage_user_role.png)
 
 ### Register Page
-![Register Page]([wwwroot/screenshoots/register.png](https://github.com/aliarmgnuygun/InveonBootcamp/blob/week/2/LibraryManagementSystem/LibraryManagementMVC/wwwroot/screenshoots/register.png))
+![Register Page](https://raw.githubusercontent.com/aliarmgnuygun/InveonBootcamp/week/2/LibraryManagementSystem/LibraryManagementMVC/wwwroot/screenshoots/register.png)
 
 ### Role List Page
-![Role List]([wwwroot/screenshoots/role_list.png](https://github.com/aliarmgnuygun/InveonBootcamp/blob/week/2/LibraryManagementSystem/LibraryManagementMVC/wwwroot/screenshoots/role_list.png))
+![Role List](https://raw.githubusercontent.com/aliarmgnuygun/InveonBootcamp/week/2/LibraryManagementSystem/LibraryManagementMVC/wwwroot/screenshoots/role_list.png)
 
 ### Update Book Page
-![Update Book]([wwwroot/screenshoots/update_book.png](https://github.com/aliarmgnuygun/InveonBootcamp/blob/week/2/LibraryManagementSystem/LibraryManagementMVC/wwwroot/screenshoots/update_book.png))
+![Update Book](https://raw.githubusercontent.com/aliarmgnuygun/InveonBootcamp/week/2/LibraryManagementSystem/LibraryManagementMVC/wwwroot/screenshoots/update_book.png)
 
 ### Update Role Page
-![Update Role]([wwwroot/screenshoots/update_role.png](https://github.com/aliarmgnuygun/InveonBootcamp/blob/week/2/LibraryManagementSystem/LibraryManagementMVC/wwwroot/screenshoots/update_role.png))
+![Update Role](https://raw.githubusercontent.com/aliarmgnuygun/InveonBootcamp/week/2/LibraryManagementSystem/LibraryManagementMVC/wwwroot/screenshoots/update_role.png)
 
 ### User List Page
-![User List]([wwwroot/screenshoots/user_list.png](https://github.com/aliarmgnuygun/InveonBootcamp/blob/week/2/LibraryManagementSystem/LibraryManagementMVC/wwwroot/screenshoots/user_list.png))
+![User List](https://raw.githubusercontent.com/aliarmgnuygun/InveonBootcamp/week/2/LibraryManagementSystem/LibraryManagementMVC/wwwroot/screenshoots/user_list.png)
+
 
 ---
 
