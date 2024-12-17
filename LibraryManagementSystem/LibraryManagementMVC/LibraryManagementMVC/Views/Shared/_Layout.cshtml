@@ -19,39 +19,50 @@
             <div class="container-fluid">
                 <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">LibraryManagementMVC</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
+                aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav me-auto">
+                        <!-- Home Link -->
                         <li class="nav-item">
                             <a class="nav-link" asp-area="Member" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
+
+                        <!-- Admin Role: Content Management Dropdown -->
                         @if (User.IsInRole(AppRole.Admin))
                         {
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                     Content Management
                                 </a>
-                                <ul class="dropdown-menu">                                   
-                                    <li class="nav-item">
+                                <ul class="dropdown-menu">
+                                    <li>
                                         <a class="dropdown-item" asp-area="Admin" asp-controller="Book" asp-action="Index">Books</a>
                                     </li>
                                     <li><hr class="dropdown-divider"></li>
-                                    <li class="nav-item">
+                                    <li>
                                         <a class="dropdown-item" asp-area="Admin" asp-controller="User" asp-action="Index">Manage Users</a>
                                     </li>
                                     <li><hr class="dropdown-divider"></li>
-                                    <li class="nav-item">
+                                    <li>
                                         <a class="dropdown-item" asp-area="Admin" asp-controller="Role" asp-action="Index">Manage Roles</a>
                                     </li>
                                 </ul>
                             </li>
                         }
+
+                        <!-- Librarian Role: Books Link -->
+                        @if (User.IsInRole(AppRole.Librarian))
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link" asp-area="Admin" asp-controller="Book" asp-action="Index">Books</a>
+                            </li>
+                        }
                     </ul>
+                    <!-- Login Partial -->
                     <partial name="_LoginPartial" />
                 </div>
-            </div>
         </nav>
     </header>
     <div class="container">

@@ -18,7 +18,7 @@
         {
         }
 
-        public Book(string title, string author, int publicationYear, string isbn, string genre, string publisher, int pageCount, string language)
+        public Book(string title, string author, int publicationYear, string isbn, string genre, string publisher, int pageCount, string language,int availableCopies)
         {
             Title = title;
             Author = author;
@@ -29,7 +29,7 @@
             PageCount = pageCount;
             Language = language;
             Summary = string.Empty;
-            AvailableCopies = 0;
+            AvailableCopies = availableCopies;
             UpdateAvailabilityStatus();
         }
     

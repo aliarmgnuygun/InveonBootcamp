@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace LibraryManagementMVC.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    [Authorize(Roles = AppRole.Admin)]
+    [Authorize(Roles = AppRole.Admin + "," + AppRole.Librarian)]
     public class BookController(IBookService service) : Controller
     {
         public async Task<IActionResult> Index()
@@ -19,11 +19,44 @@ namespace LibraryManagementMVC.Areas.Admin.Controllers
         public async Task<IActionResult> Details(Guid id)
         {
             var book = await service.GetDetailsByIdAsync(id);
-
-            if (book == null)
-                return NotFound();
-
             return View(book);
+        }
+
+        public async Task<IActionResult> Upsert(Guid id)
+        {
+            if (id == Guid.Empty)
+            {
+                return View(new BookDetailsDto(Guid.Empty, string.Empty, string.Empty, 0, string.Empty, string.Empty, string.Empty, 0, string.Empty, string.Empty, 0));
+            }
+            else
+            {
+                var book = await service.GetDetailsByIdAsync(id);
+                return View(book);
+            }
+
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Upsert(BookDetailsDto bookDetailsDto)
+        {
+            if (ModelState.IsValid)
+            {
+                var book = await service.GetDetailsByIdAsync(bookDetailsDto.Id);
+
+                if (bookDetailsDto.Id == Guid.Empty)
+                {
+                    await service.CreateAsync(bookDetailsDto);
+                    TempData["Success"] = "Book created successfully!";
+                }
+                else
+                {
+                    await service.UpdateAsync(bookDetailsDto);
+                    TempData["Success"] = "Book updated successfully!";
+                }
+                return RedirectToAction("Index");
+            }
+
+            return View(bookDetailsDto);
         }
 
         #region API CALLS
@@ -32,6 +65,13 @@ namespace LibraryManagementMVC.Areas.Admin.Controllers
         {
             List<BookDto> objProductList = await service.GetAllAsync();
             return Json(new { data = objProductList });
+        }
+
+        [HttpDelete]
+        public async Task<IActionResult> Delete(Guid id)
+        {
+            await service.DeleteAsync(id);
+            return Json(new { success = true, message = "Book deleted successfully." });
         }
         #endregion
     }

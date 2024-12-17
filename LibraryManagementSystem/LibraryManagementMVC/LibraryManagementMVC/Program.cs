@@ -1,4 +1,5 @@
 using LibraryManagementSystem.Data.DbInitializer;
+using LibraryManagementSystem.Services.ExceptionHandlers;
 using LibraryManagementSystem.Services.Extensions;
 
 namespace LibraryManagementMVC
@@ -16,6 +17,8 @@ namespace LibraryManagementMVC
             builder.Services.AddServices().AddRepositories();
             builder.Services.AddScoped<IDbInitializer, DbInitializer>();
             builder.Services.AddIdentityServices();
+
+            builder.Services.AddExceptionHandler<NotFoundExceptionHandler>().AddExceptionHandler<GlobalExceptionHandler>();
 
             var app = builder.Build();
             app.AddSeedData();

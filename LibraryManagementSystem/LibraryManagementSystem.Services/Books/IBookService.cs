@@ -8,5 +8,10 @@ namespace LibraryManagementSystem.Services.Books
         Task<BookDetailsDto> GetDetailsByIdAsync(Guid id);
         Task<List<BookDto>> GetAllAsync();
 
+        Task<BookDetailsDto> CreateAsync(BookDetailsDto bookDto);
+        Task<BookDetailsDto> UpdateAsync(BookDetailsDto bookDto);
+        Task DeleteAsync(Guid id);
+        Task LendBookAsync(Guid id);
+        Task ReturnBookAsync(Guid id);
     }
 }

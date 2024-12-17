@@ -50,10 +50,12 @@ namespace LibraryManagementMVC.Areas.Admin.Controllers
                 await userService.UpdateAsync(existUser, appUserDto.AppUser.Role);
                 await userService.RemoveRoleFromAppUserAsync(existUser, oldRole);
                 await userService.AddToRoleAsync(existUser, appUserDto.AppUser.Role);
+                TempData["Success"] = "User Role updated successfully";
             }
             else
             {
                 await userService.UpdateAsync(existUser, oldRole);
+                TempData["Success"] = "User Role updated successfully";
             }
             return RedirectToAction("Index");
         }
@@ -73,17 +75,6 @@ namespace LibraryManagementMVC.Areas.Admin.Controllers
             await userService.DeleteAsync(id);
             return Json(new { success = true, message = "User deleted successfully." });
         }
-
-        //[HttpPost]
-        //public async Task<IActionResult> Create([FromBody] AppUserDto newUser)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        await userService.CreateAsync(newUser);
-        //        return Json(new { success = true, message = "User created successfully." });
-        //    }
-        //    return Json(new { success = false, message = "Invalid user data." });
-        //}
 
         #endregion
     }

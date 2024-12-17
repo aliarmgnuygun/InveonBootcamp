@@ -1,22 +1,39 @@
 using LibraryManagementMVC.Models;
+using LibraryManagementSystem.Services.Books;
+using LibraryManagementSystem.Services.Books.Dto;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
 namespace LibraryManagementMVC.Areas.Member.Controllers
 {
     [Area("Member")]
-    public class HomeController : Controller
+    public class HomeController(IBookService service) : Controller
     {
-        private readonly ILogger<HomeController> _logger;
 
-        public HomeController(ILogger<HomeController> logger)
+        public async Task<IActionResult> Index()
         {
-            _logger = logger;
+            var books = await service.GetAllAsync();
+            return View(books);
+        }
+        public async Task<IActionResult> Details(Guid id)
+        {
+            var book = await service.GetDetailsByIdAsync(id);
+            return View(book);
         }
 
-        public IActionResult Index()
+        [Authorize]
+        public async Task<IActionResult> Lend(Guid id)
         {
-            return View();
+            await service.LendBookAsync(id);
+            return RedirectToAction("Index");
+        }
+
+        [Authorize]
+        public async Task<IActionResult> Return(Guid id)
+        {
+            await service.ReturnBookAsync(id);
+            return RedirectToAction("Index");
         }
 
         public IActionResult Privacy()
@@ -28,6 +45,13 @@ namespace LibraryManagementMVC.Areas.Member.Controllers
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> GetAll()
+        {
+            List<BookDto> objProductList = await service.GetAllAsync();
+            return Json(new { data = objProductList });
         }
     }
 }

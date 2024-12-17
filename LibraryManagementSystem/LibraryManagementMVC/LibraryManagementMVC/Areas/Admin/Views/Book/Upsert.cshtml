@@ -1,0 +1,103 @@
+﻿@model LibraryManagementSystem.Services.Books.Dto.BookDetailsDto
+
+<div class="card shadow border-0 my-4 mb-4">
+    <div class="card-header bg-secondary bg-gradient text-center">
+        <h2 class="text-white py-2">@(Model.Id == Guid.Empty ? "Create Book" : "Update Book")</h2>
+    </div>
+
+    <div class="card-body p-4">
+        <form method="post" class="row" enctype="multipart/form-data">
+            <!-- Id (Readonly) -->
+            <div class="form-floating py-2 col-12">
+                <input asp-for="Id" class="form-control border-0 shadow" readonly />
+                <label asp-for="Id" class="ms-2"></label>
+            </div>
+
+            <!-- Title -->
+            <div class="form-floating py-2 col-12">
+                <input asp-for="Title" class="form-control border-0 shadow" placeholder="Enter Title" />
+                <label asp-for="Title" class="ms-2"></label>
+                <span asp-validation-for="Title" class="text-danger"></span>
+            </div>
+
+            <!-- Author -->
+            <div class="form-floating py-2 col-12">
+                <input asp-for="Author" class="form-control border-0 shadow" placeholder="Enter Author" />
+                <label asp-for="Author" class="ms-2"></label>
+                <span asp-validation-for="Author" class="text-danger"></span>
+            </div>
+
+            <!-- Publication Year -->
+            <div class="form-floating py-2 col-12">
+                <input asp-for="PublicationYear" class="form-control border-0 shadow" placeholder="Enter Publication Year" />
+                <label asp-for="PublicationYear" class="ms-2"></label>
+                <span asp-validation-for="PublicationYear" class="text-danger"></span>
+            </div>
+
+            <!-- ISBN -->
+            <div class="form-floating py-2 col-12">
+                <input asp-for="ISBN" class="form-control border-0 shadow" placeholder="Enter ISBN" />
+                <label asp-for="ISBN" class="ms-2"></label>
+                <span asp-validation-for="ISBN" class="text-danger"></span>
+            </div>
+
+            <!-- Genre -->
+            <div class="form-floating py-2 col-12">
+                <input asp-for="Genre" class="form-control border-0 shadow" placeholder="Enter Genre" />
+                <label asp-for="Genre" class="ms-2"></label>
+                <span asp-validation-for="Genre" class="text-danger"></span>
+            </div>
+
+            <!-- Publisher -->
+            <div class="form-floating py-2 col-12">
+                <input asp-for="Publisher" class="form-control border-0 shadow" placeholder="Enter Publisher" />
+                <label asp-for="Publisher" class="ms-2"></label>
+                <span asp-validation-for="Publisher" class="text-danger"></span>
+            </div>
+
+            <!-- Page Count -->
+            <div class="form-floating py-2 col-12">
+                <input asp-for="PageCount" class="form-control border-0 shadow" placeholder="Enter Page Count" />
+                <label asp-for="PageCount" class="ms-2"></label>
+                <span asp-validation-for="PageCount" class="text-danger"></span>
+            </div>
+
+            <!-- Language -->
+            <div class="form-floating py-2 col-12">
+                <input asp-for="Language" class="form-control border-0 shadow" placeholder="Enter Language" />
+                <label asp-for="Language" class="ms-2"></label>
+                <span asp-validation-for="Language" class="text-danger"></span>
+            </div>
+
+            <!-- Summary -->
+            <div class="form-floating py-2 col-12">
+                <textarea asp-for="Summary" class="form-control border-0 shadow" placeholder="Enter Summary"></textarea>
+                <label asp-for="Summary" class="ms-2"></label>
+                <span asp-validation-for="Summary" class="text-danger"></span>
+            </div>
+
+            <!-- Available Copies -->
+            <div class="form-floating py-2 col-12">
+                <input asp-for="AvailableCopies" class="form-control border-0 shadow" placeholder="Enter Available Copies" />
+                <label asp-for="AvailableCopies" class="ms-2"></label>
+                <span asp-validation-for="AvailableCopies" class="text-danger"></span>
+            </div>
+
+            <!-- Buttons -->
+            <div class="row pt-3">
+                <div class="col-6 col-md-3">
+                    <button type="submit" class="btn @(Model.Id == Guid.Empty ? "btn-primary" : "btn-success") w-100">
+                        @(Model.Id == Guid.Empty ? "Create" : "Update")
+                    </button>
+                </div>
+                <div class="col-6 col-md-3">
+                    <a asp-action="Index" class="btn btn-outline-secondary w-100">Back to List</a>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
